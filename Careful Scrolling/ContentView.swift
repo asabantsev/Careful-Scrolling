@@ -9,13 +9,30 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            ZStack(alignment: .bottom) {
+                ScrollView(.vertical) {
+                    VStack {
+                        ForEach(1...100, id: \.self) { index in
+                            Text("\(index)")
+                                .monospaced()
+                                .foregroundColor(.gray)
+                                .font(.system(size: 24))
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                }
+                .safeAreaInset(edge: .bottom) {
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(height: 50)
+                        .opacity(0.75)
+                }
+            }
+            .tabItem {
+                Label("First", systemImage: "star")
+            }
         }
-        .padding()
     }
 }
 
